@@ -2,6 +2,10 @@
  *
  * the permutations form a tree, where each node has 8 children (for 8 possible numberOfMoves of the knight)
  * we can traverse this tree using BFS and return the number of moves when src === dest
+ * 
+ * we can always reach any destination from any source without repeating any position according to The knight's tour problem
+ * https://www.chess.com/terms/knights-tour-chess
+ * so when next moves are being calculated, we can skip the ones that are already visited
  *
  * @param {number} src
  * @param {number} dest
@@ -42,8 +46,10 @@ function solution(src, dest) {
 
   // standard BFS pattern with a queue where each item is a move [position, numberOfmoves]
   // for each previous move removed from the queue, we will loop through all possible next moves
-  // if the next move is destination, return the numberOfMoves + 1
-  // otherwise add that move to the queue if it's within the board and not visited before
+  // if the next move is within the board
+    // if destination is reached, return numberOfMoves + 1
+    // otherwise if it's within the board and not visited before
+      // mark it as visited and add that move to the queue
   let queue = [[src, 0]]
   let visited = new Set()
   visited.add(src)
