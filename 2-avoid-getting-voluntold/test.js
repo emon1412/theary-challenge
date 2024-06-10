@@ -1,6 +1,6 @@
 const solution = require('.')
 
-describe.only('quetion 2', () => {
+describe('quetion 2', () => {
   const testCases = [
     [[0, 1], 3],
     [[19, 36], 1],
