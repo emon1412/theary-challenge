@@ -23,7 +23,7 @@ function createVisitedArray(height, width) {
  *
  * similar to the previous problem, the permutations form a tree
  * but this time for each move, we have 2 possible states (wallRemoved, wallNotRemoved) for every possible next moves (up, down, left, right)
- * we can traverse this permutation tree using BFS and return the number of moves when destination is reached
+ * we can traverse this permutation tree using BFS and return the number of moves when we reach bottom-right corner
  *
  * @param {number[][]} map
  *
@@ -54,8 +54,12 @@ function solution(map) {
 
   // standard BFS pattern with a queue where each item is a move [x, y, wallRemoved, numberOfMoves]
   // for each previous move removed from the queue, we will loop through all possible next moves
-  // if the next move is destination, return the numberOfMoves + 1
-  // otherwise add that move to the queue if it's within the board and not visited before
+  // if the next move is within the board
+    // if the next move is destination, return the numberOfMoves + 1
+    // otherwise if the next move is not a wall and is not visited before
+      // mark it as visited and add it to the queue along with the current wallRemoved state
+    // otherwise if the next move is a wall and a wall can still be removed and is not visited before
+      // mark it as visited and add it to the queue along with the wallRemoved state set to 1
 
   let queue = [[0, 0, 0, 1]]
   const visited = createVisitedArray(height, width)
